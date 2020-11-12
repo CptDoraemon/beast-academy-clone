@@ -3,6 +3,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import {ScreenContext} from "../screen-context";
 import clsx from 'clsx';
 import {createStyles} from "@material-ui/core";
+import Header from "../components/header";
 
 const commonStyles = createStyles({
   absolute: {
@@ -115,10 +116,11 @@ const useStyles = makeStyles(theme => ({
     left: 0
   },
   mainContent: {
+    position: 'relative',
     flexGrow: 1,
     height: '100%',
-    backgroundColor: 'green',
-    boxShadow: 'inset 0 0 10px 10px rgba(0,0,0,0.2)'
+    backgroundColor: '#fff',
+    boxShadow: 'inset 0 0 10px 10px rgba(0,0,0,0.2)',
   }
 }));
 
@@ -138,7 +140,7 @@ const Home: React.FC = () => {
           <div className={classes.leftWhiteBorder}> </div>
         </div>
         <div className={classes.mainContent}>
-
+          <Header/>
         </div>
         <div className={classes.mainContentBorder}>
           <div className={classes.rightTopBorder} style={{borderTopWidth: screen?.height}}> </div>
