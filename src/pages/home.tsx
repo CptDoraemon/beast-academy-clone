@@ -4,18 +4,13 @@ import {ScreenContext} from "../screen-context";
 import clsx from 'clsx';
 import {createStyles} from "@material-ui/core";
 import Header from "../components/header";
+import Triangle from "../components/triangle";
 
 const commonStyles = createStyles({
   absolute: {
     position: 'absolute',
     top: 0,
     left: 0,
-  },
-  triangleBorder: {
-    position: 'absolute',
-    width: 0,
-    height: 0,
-    borderStyle: 'solid',
   },
   whiteBorder: {
     position: 'absolute',
@@ -59,57 +54,9 @@ const useStyles = makeStyles(theme => ({
     height: '100%',
     position: 'relative',
   },
-  leftTopBorder: {
-    ...commonStyles.triangleBorder,
-    top: 0,
-    right: 0,
-    borderLeftWidth: 100,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    borderTopColor: '#00b2dd',
-    borderBottomColor: 'transparent',
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-  },
-  leftBottomBorder: {
-    ...commonStyles.triangleBorder,
-    top: 0,
-    right: 0,
-    borderLeftWidth: 75,
-    borderRightWidth: 0,
-    borderTopWidth: 0,
-    borderBottomColor: '#00b2dd',
-    borderTopColor: '#transparent',
-    borderLeftColor: 'transparent',
-    borderRightColor: 'transparent',
-  },
   leftWhiteBorder: {
     ...commonStyles.whiteBorder,
     right: 0
-  },
-  rightTopBorder: {
-    ...commonStyles.triangleBorder,
-    top: 0,
-    left: 0,
-    borderLeftWidth: 100,
-    borderRightWidth: 0,
-    borderBottomWidth: 0,
-    borderLeftColor: '#00b2dd',
-    borderBottomColor: 'transparent',
-    borderTop: 'transparent',
-    borderRightColor: 'transparent',
-  },
-  rightBottomBorder: {
-    ...commonStyles.triangleBorder,
-    top: 0,
-    left: 0,
-    borderLeftWidth: 75,
-    borderRightWidth: 0,
-    borderTopWidth: 0,
-    borderLeftColor: '#00b2dd',
-    borderTopColor: '#transparent',
-    borderBottomColor: 'transparent',
-    borderRightColor: 'transparent',
   },
   rightWhiteBorder: {
     ...commonStyles.whiteBorder,
@@ -135,16 +82,16 @@ const Home: React.FC = () => {
       </div>
       <div className={clsx(classes.fullSize, classes.mainContentWrapper)}>
         <div className={classes.mainContentBorder}>
-          <div className={classes.leftTopBorder} style={{borderTopWidth: screen?.height}}> </div>
-          <div className={classes.leftBottomBorder} style={{borderBottomWidth: screen?.height}}> </div>
+          <Triangle width={100} height={screen?.height || 0} vertices={'1 1 1 0'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: 0}}/>
+          <Triangle width={80} height={screen?.height || 0} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: 0}}/>
           <div className={classes.leftWhiteBorder}> </div>
         </div>
         <div className={classes.mainContent}>
           <Header/>
         </div>
         <div className={classes.mainContentBorder}>
-          <div className={classes.rightTopBorder} style={{borderTopWidth: screen?.height}}> </div>
-          <div className={classes.rightBottomBorder} style={{borderBottomWidth: screen?.height}}> </div>
+          <Triangle width={80} height={screen?.height || 0} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: 0}}/>
+          <Triangle width={100} height={screen?.height || 0} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: 0}}/>
           <div className={classes.rightWhiteBorder}> </div>
         </div>
       </div>

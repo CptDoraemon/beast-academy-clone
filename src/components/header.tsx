@@ -73,8 +73,9 @@ const Header: React.FC = () => {
           <div className={classes.centerButtonsGroupBackground}>
 
           </div>
-
         </div>
+        <HeaderButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} width={'8%'} height={'100%'} title={'home'}/>
+        <HeaderButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} width={'8%'} height={'100%'} title={'home'}/>
 
       </div>
     </div>

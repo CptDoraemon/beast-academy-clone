@@ -1,8 +1,9 @@
-import React, {useContext} from "react";
+import React from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
-const iconDefaultShadow = 'drop-shadow(3px 3px 0 rgba(0,0,0,.5))';
-const iconHoverShadow = iconDefaultShadow + ' ' + 'drop-shadow(0 0 2px rgba(255,255,255,.9))';
+const iconDefault = 'drop-shadow(3px 3px 0 rgba(0,0,0,.5))';
+const iconHover = iconDefault + ' ' + 'drop-shadow(0 0 2px rgba(255,255,255,.9))';
+const iconActive = 'drop-shadow(1px 1px 0 rgba(0,0,0,.5)) drop-shadow(0 0 1px rgba(255,255,255,.9))';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -11,9 +12,13 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     backgroundColor: 'transparent',
     cursor: `url(${process.env.PUBLIC_URL + '/assets/cursors/wonky-hand-point.cur'}),pointer`,
-    filter: iconDefaultShadow,
+    filter: iconDefault,
     '&:hover': {
-      filter: iconHoverShadow,
+      filter: iconHover,
+    },
+    '&:active': {
+      filter: iconActive,
+      transform: `translate(2px, 2px)`
     },
     '& img': {
       maxWidth: '100%',
