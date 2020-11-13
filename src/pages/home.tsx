@@ -2,41 +2,32 @@ import React, {useContext} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {ScreenContext} from "../screen-context";
 import clsx from 'clsx';
-import {createStyles} from "@material-ui/core";
 import Header from "../components/header";
 import Triangle from "../components/triangle";
 import HomePaintings from "../components/home-paintings";
-
-const commonStyles = createStyles({
-  absolute: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-  },
-  whiteBorder: {
-    position: 'absolute',
-    width: 10,
-    height: '100%',
-    backgroundColor: '#fff',
-    top: 0,
-  },
-});
 
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
     position: 'relative',
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    overflow: 'hidden',
+    '& img': {
+      userSelect: 'none',
+      userDrag: 'none'
+    },
   },
   fullSize: {
     width: '100%',
     height: '100%'
   },
   background1: {
-    ...commonStyles.absolute,
+    position: 'absolute',
+    top: 0,
+    left: 0,
     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/patch-blue-bright.png'})`,
     zIndex: -1,
   },
@@ -44,29 +35,17 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/mathjazz.svg'})`
   },
   mainContentWrapper: {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  mainContentBorder: {
-    width: 100,
-    height: '100%',
     position: 'relative',
-  },
-  leftWhiteBorder: {
-    ...commonStyles.whiteBorder,
-    right: 0
-  },
-  rightWhiteBorder: {
-    ...commonStyles.whiteBorder,
-    left: 0
+    border: '10px solid #fff',
+    flexShrink: 0,
+    boxShadow: 'inset 0 0 30px 10px rgba(0,0,0,0.2)',
   },
   mainContent: {
     position: 'relative',
-    backgroundColor: '#fff',
-    boxShadow: 'inset 0 0 10px 10px rgba(0,0,0,0.2)',
-    overflow: 'hidden'
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
+    zIndex: -1,
   }
 }));
 
@@ -74,25 +53,40 @@ const Home: React.FC = () => {
   const classes = useStyles();
   const screen = useContext(ScreenContext);
 
+  if (screen === null) {
+    return <></>
+  }
+
   return (
-    <div style={{height: screen?.height}} className={classes.root}>
+    <div className={classes.root} style={{height: screen.height}}>
       <div className={clsx(classes.background1, classes.fullSize)}>
         <div className={clsx(classes.background2, classes.fullSize)}> </div>
       </div>
-      <div className={clsx(classes.fullSize, classes.mainContentWrapper)}>
-        <div className={classes.mainContentBorder}>
-          <Triangle width={100} height={screen?.height || 0} vertices={'1 1 1 0'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: 0}}/>
-          <Triangle width={70} height={screen?.height || 0} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: 0}}/>
-          <div className={classes.leftWhiteBorder}> </div>
+      <div className={classes.mainContentWrapper} style={{width: screen.mainContainerWidth, height: screen.mainContainerHeight, boxSizing: 'content-box'}}>
+        {/* left */}
+        <div>
+          <Triangle width={100} height={screen.height} vertices={'1 1 1 0'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: -110}}/>
+          <Triangle width={70} height={screen.height} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: -80}}/>
         </div>
-        <div className={classes.mainContent} style={{width: (screen?.height || 0) * 1.333, height: screen?.height}}>
-          <Header/>
+        {/* right */}
+        <div>
+          <Triangle width={70} height={screen.height} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: -80}}/>
+          <Triangle width={100} height={screen.height} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: -110}}/>
+        </div>
+        {/* top */}
+        <div>
+          <Triangle width={screen.width} height={100} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: -110, left: 0}}/>
+          <Triangle width={screen.width} height={70} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: -80, left: 0}}/>
+        </div>
+        {/* bottom */}
+        <div>
+          <Triangle width={screen.width} height={100} vertices={'1 1 1 0'} color={'#00b2dd'} style={{position: 'absolute', bottom: -110, left: 0}}/>
+          <Triangle width={screen.width} height={70} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', bottom: -80, left: 0}}/>
+        </div>
+
+        <Header/>
+        <div className={classes.mainContent}>
           <HomePaintings/>
-        </div>
-        <div className={classes.mainContentBorder}>
-          <Triangle width={70} height={screen?.height || 0} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: 0}}/>
-          <Triangle width={100} height={screen?.height || 0} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: 0}}/>
-          <div className={classes.rightWhiteBorder}> </div>
         </div>
       </div>
     </div>
