@@ -5,7 +5,7 @@ Why clone this website? It has so many design features involving irregular shape
 and I was wondering if I can get them right if I was building this website. Then there it is.
 
 #### Improvement over the original website:
-* Buttons are more accessible (it was a div element without any keyword event support).  
+* Buttons are more accessible (it was a div element without any keyboard event support).  
 * Better alignment of the clock hands in the clock on the main building.
 * Added a clock hand for the seconds (although it's weird for such big clock to have a hand for second, it's fun to do so).
 * tbc...
