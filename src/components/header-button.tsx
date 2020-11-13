@@ -13,12 +13,15 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'transparent',
     cursor: `url(${process.env.PUBLIC_URL + '/assets/cursors/wonky-hand-point.cur'}),pointer`,
     filter: iconDefault,
-    '&:hover': {
+    '&:hover, &:focus': {
       filter: iconHover,
     },
     '&:active': {
       filter: iconActive,
       transform: `translate(2px, 2px)`
+    },
+    '&:focus': {
+      outline: 'none'
     },
     '& img': {
       maxWidth: '100%',
