@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import {createStyles} from "@material-ui/core";
 import Header from "../components/header";
 import Triangle from "../components/triangle";
+import HomePaintings from "../components/home-paintings";
 
 const commonStyles = createStyles({
   absolute: {
@@ -43,7 +44,6 @@ const useStyles = makeStyles(theme => ({
     backgroundImage: `url(${process.env.PUBLIC_URL + '/assets/mathjazz.svg'})`
   },
   mainContentWrapper: {
-    maxWidth: '1400px',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
@@ -64,10 +64,9 @@ const useStyles = makeStyles(theme => ({
   },
   mainContent: {
     position: 'relative',
-    flexGrow: 1,
-    height: '100%',
     backgroundColor: '#fff',
     boxShadow: 'inset 0 0 10px 10px rgba(0,0,0,0.2)',
+    overflow: 'hidden'
   }
 }));
 
@@ -83,14 +82,15 @@ const Home: React.FC = () => {
       <div className={clsx(classes.fullSize, classes.mainContentWrapper)}>
         <div className={classes.mainContentBorder}>
           <Triangle width={100} height={screen?.height || 0} vertices={'1 1 1 0'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: 0}}/>
-          <Triangle width={80} height={screen?.height || 0} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: 0}}/>
+          <Triangle width={70} height={screen?.height || 0} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: 0}}/>
           <div className={classes.leftWhiteBorder}> </div>
         </div>
-        <div className={classes.mainContent}>
+        <div className={classes.mainContent} style={{width: (screen?.height || 0) * 1.333, height: screen?.height}}>
           <Header/>
+          <HomePaintings/>
         </div>
         <div className={classes.mainContentBorder}>
-          <Triangle width={80} height={screen?.height || 0} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: 0}}/>
+          <Triangle width={70} height={screen?.height || 0} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: 0}}/>
           <Triangle width={100} height={screen?.height || 0} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: 0}}/>
           <div className={classes.rightWhiteBorder}> </div>
         </div>

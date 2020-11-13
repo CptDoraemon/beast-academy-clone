@@ -6,6 +6,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: '90%',
     position: 'absolute',
+    zIndex: theme.zIndex.appBar,
     top: 0,
     left: '50%',
     transform: 'translateX(-50%)',
