@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Chapter_Icon_3A" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 168 74" style="enable-background:new 0 0 168 74;" xml:space="preserve" width="168" height="74" preserveAspectRatio="none">
+<style type="text/css">
+  .main{filter:url(#Shadow);transform:translate(5px, 5px);}
+	.st0{fill:#FFCE41;}
+	.st1{fill:#FFFFFF;}
+</style>
+<filter  filterUnits="objectBoundingBox" id="Shadow">
+  <feGaussianBlur  in="SourceAlpha" result="blur" stdDeviation="4"></feGaussianBlur>
+  <feOffset  dx="0" dy="0" in="blur" result="offsetBlurredAlpha"></feOffset>
+  <feComponentTransfer in="offsetBlurredAlpha" result="offsetBlurredAlphaLigher">
+    <feFuncA type="linear" slope="0.8"/>
+  </feComponentTransfer>
+  <feMerge>
+    <feMergeNode  in="offsetBlurredAlphaLigher"></feMergeNode>
+    <feMergeNode  in="SourceGraphic"></feMergeNode>
+  </feMerge>
+</filter>
+<g class="main">
+	<polygon class="st0" points="132.8,26.3 156.9,62.6 114,42.4 	"/>
+	<polygon class="st0" points="139.6,3.9 1.1,1.4 6.1,54.7 138.8,46.7 	"/>
+	<polygon class="st1" points="5.8,5.7 135.3,6.7 132.9,41 10.6,48.5 	"/>
+</g>
+</svg>
