@@ -1,6 +1,8 @@
 import React, {useContext, useEffect, useRef} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ThemeButton from "./theme-button";
+import MuiTooltip from "@material-ui/core/Tooltip";
+import Tooltip from "./tooptip";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -121,16 +123,24 @@ const Header: React.FC = () => {
     <div className={classes.root}>
       <img src={process.env.PUBLIC_URL + '/assets/ba-top-bar.svg'} className={classes.background}/>
       <div className={classes.buttonsWrapper}>
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-baHome.svg`} style={{width: '9%', height: '100%'}} title={'home'}/>
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
+        <Tooltip text={'home'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-baHome.svg`} style={{width: '9%', height: '100%'}} title={'home'}/>
+        </Tooltip>
+        <Tooltip text={'class'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell.svg`} style={{width: '8%', height: '100%'}} title={'class'}/>
+        </Tooltip>
+        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book.svg`} style={{width: '8%', height: '100%'}} title={'library'}/>
+        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={{width: '8%', height: '100%'}} title={'theatre'}/>
+
+        {/* center groups */}
         <div className={classes.centerButtonsGroup} ref={centerGroupRef}>
           <canvas ref={canvasRef} width={1} height={1} className={classes.centerButtonsGroupBackground}/>
           <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/octagon.svg`} style={centerButtonStyle} title={'learn more'} isText={true}/>
           <span className={classes.centerTitle}>DEMO</span>
           <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/octagon.svg`} style={centerButtonStyle} title={'enroll now'} isText={true}/>
         </div>
+
+
         <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
         <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
         <div style={{width: '17%', height: '100%', transform: 'translateX(10%)'}} className={classes.right}>

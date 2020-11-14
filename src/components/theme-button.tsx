@@ -70,48 +70,56 @@ interface HeaderButtonProps {
   isText?: boolean
 }
 
-const ThemeButton: React.FC<HeaderButtonProps> = ({iconSource, backgroundSource, style, iconStyle, title, isText = false}) => {
-  const classes = useStyles();
+const ThemeButton = React.forwardRef<HTMLButtonElement | null, HeaderButtonProps>(({iconSource, backgroundSource, style, iconStyle, title, isText = false}, ref) => {
+    const classes = useStyles();
 
-  const rootRef = useRef<HTMLButtonElement>(null);
-  const [fontSize, setFontSize] = useState(0);
-  useEffect(() => {
-    if (!rootRef.current) {
-      return
-    }
-    const lines = title.split(' ').length || 1;
-    const rootHeight = rootRef.current.getBoundingClientRect().height;
-    console.log(rootRef.current, rootHeight);
-    setFontSize(Math.round(rootHeight / lines / 4));
-  }, [title]);
-
-  const defaultIconStyle: React.CSSProperties = useMemo(() => {
-    if (isText) {
-      return {
-        width: '15%',
-        height: '100%',
-        objectFit: 'contain'
+    const rootRef = useRef<HTMLButtonElement | null>(null);
+    const [fontSize, setFontSize] = useState(0);
+    useEffect(() => {
+      if (!rootRef.current) {
+        return
       }
-    } else {
-      return {
-        width: '70%',
-        height: '70%',
-        objectFit: 'contain'
-      }
-    }
-  }, [isText]);
+      const lines = title.split(' ').length || 1;
+      const rootHeight = rootRef.current.getBoundingClientRect().height;
+      setFontSize(Math.round(rootHeight / lines / 4));
+    }, [title]);
 
-  return (
-    <button className={classes.root} style={{...style}} aria-label={title} ref={rootRef}>
-      <div className={classes.inner}>
-        {backgroundSource && <div className={classes.background}><img src={backgroundSource} alt={title}/></div>}
-        <div className={classes.content} style={{...iconStyle}}>
-          {iconSource && <img src={iconSource} alt={title} style={{...defaultIconStyle, ...iconStyle}}/>}
-          {isText && <span style={{fontSize}}>{title}</span>}
+    const handleRef = (node: HTMLButtonElement) => {
+      rootRef.current = node;
+      if (ref) {
+        // @ts-ignore
+        ref.current = node;
+      }
+    };
+
+    const defaultIconStyle: React.CSSProperties = useMemo(() => {
+      if (isText) {
+        return {
+          width: '15%',
+          height: '100%',
+          objectFit: 'contain'
+        }
+      } else {
+        return {
+          width: '70%',
+          height: '70%',
+          objectFit: 'contain'
+        }
+      }
+    }, [isText]);
+
+    return (
+      <button className={classes.root} style={{...style}} aria-label={title} ref={handleRef}>
+        <div className={classes.inner}>
+          {backgroundSource && <div className={classes.background}><img src={backgroundSource} alt={title}/></div>}
+          <div className={classes.content} style={{...iconStyle}}>
+            {iconSource && <img src={iconSource} alt={title} style={{...defaultIconStyle, ...iconStyle}}/>}
+            {isText && <span style={{fontSize}}>{title}</span>}
+          </div>
         </div>
-      </div>
-    </button>
-  )
-};
+      </button>
+    )
+  }
+);
 
 export default ThemeButton
