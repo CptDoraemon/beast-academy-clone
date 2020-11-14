@@ -15,6 +15,8 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
+    fontFamily: '"RobotoSlab", serif',
+    userSelect: 'none',
     '& img': {
       userSelect: 'none',
       userDrag: 'none'
@@ -56,6 +58,12 @@ const Home: React.FC = () => {
     return <></>
   }
 
+  const triangleLong = 70;
+  const triangleShort = 50;
+  const border = 10;
+  const offsetLong = - triangleLong - border;
+  const offsetShort = - triangleShort - border;
+
   return (
     <div className={classes.root} style={{height: screen.height}}>
       <div className={clsx(classes.background1, classes.fullSize)}>
@@ -64,18 +72,18 @@ const Home: React.FC = () => {
       <div className={classes.mainContentWrapper} style={{width: screen.mainContainerWidth, height: screen.mainContainerHeight, boxSizing: 'content-box'}}>
         {/* left */}
         <div>
-          <Triangle width={100} height={screen.height} vertices={'1 1 1 0'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: -110}}/>
-          <Triangle width={70} height={screen.height} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: -80}}/>
+          <Triangle width={triangleLong} height={screen.height} vertices={'1 1 1 0'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: offsetLong}}/>
+          <Triangle width={triangleShort} height={screen.height} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, left: offsetShort}}/>
         </div>
         {/* right */}
         <div>
-          <Triangle width={70} height={screen.height} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: -80}}/>
-          <Triangle width={100} height={screen.height} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: -110}}/>
+          <Triangle width={triangleShort} height={screen.height} vertices={'1 1 0 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: offsetShort}}/>
+          <Triangle width={triangleLong} height={screen.height} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: 0, right: offsetLong}}/>
         </div>
         {/* top */}
         <div>
-          <Triangle width={screen.width} height={100} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: -110, left: 0}}/>
-          <Triangle width={screen.width} height={70} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: -80, left: 0}}/>
+          <Triangle width={screen.width} height={triangleLong} vertices={'1 0 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: offsetLong, left: 0}}/>
+          <Triangle width={screen.width} height={triangleShort} vertices={'0 1 1 1'} color={'#00b2dd'} style={{position: 'absolute', top: offsetShort, left: 0}}/>
         </div>
         {/* bottom */}
         <div>

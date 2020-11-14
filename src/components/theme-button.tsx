@@ -65,11 +65,12 @@ interface HeaderButtonProps {
   iconSource?: string,
   backgroundSource?: string,
   style?: React.CSSProperties,
+  iconStyle?: React.CSSProperties,
   title: string,
   isText?: boolean
 }
 
-const ThemeButton: React.FC<HeaderButtonProps> = ({iconSource, backgroundSource, style, title, isText = false}) => {
+const ThemeButton: React.FC<HeaderButtonProps> = ({iconSource, backgroundSource, style, iconStyle, title, isText = false}) => {
   const classes = useStyles();
 
   const rootRef = useRef<HTMLButtonElement>(null);
@@ -83,7 +84,7 @@ const ThemeButton: React.FC<HeaderButtonProps> = ({iconSource, backgroundSource,
     setFontSize(rootHeight / lines / 4);
   }, [title]);
 
-  const iconStyle: React.CSSProperties = useMemo(() => {
+  const defaultIconStyle: React.CSSProperties = useMemo(() => {
     if (isText) {
       return {
         width: '15%',
@@ -103,8 +104,8 @@ const ThemeButton: React.FC<HeaderButtonProps> = ({iconSource, backgroundSource,
     <button className={classes.root} style={{...style}} aria-label={title} ref={rootRef}>
       <div className={classes.inner}>
         {backgroundSource && <div className={classes.background}><img src={backgroundSource} alt={title}/></div>}
-        <div className={classes.content}>
-          {iconSource && <img src={iconSource} alt={title} style={iconStyle}/>}
+        <div className={classes.content} style={{...iconStyle}}>
+          {iconSource && <img src={iconSource} alt={title} style={{...defaultIconStyle, ...iconStyle}}/>}
           {isText && <span style={{fontSize}}>{title}</span>}
         </div>
       </div>
