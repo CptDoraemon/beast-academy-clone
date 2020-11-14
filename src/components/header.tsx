@@ -5,6 +5,7 @@ import ThemeButton from "./theme-button";
 const useStyles = makeStyles(theme => ({
   root: {
     width: '90%',
+    height: '10%',
     position: 'absolute',
     zIndex: theme.zIndex.appBar,
     top: 0,

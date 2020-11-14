@@ -81,7 +81,8 @@ const ThemeButton: React.FC<HeaderButtonProps> = ({iconSource, backgroundSource,
     }
     const lines = title.split(' ').length || 1;
     const rootHeight = rootRef.current.getBoundingClientRect().height;
-    setFontSize(rootHeight / lines / 4);
+    console.log(rootRef.current, rootHeight);
+    setFontSize(Math.round(rootHeight / lines / 4));
   }, [title]);
 
   const defaultIconStyle: React.CSSProperties = useMemo(() => {
