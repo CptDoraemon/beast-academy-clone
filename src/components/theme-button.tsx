@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useMemo, useRef, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 
 const iconDefault = 'drop-shadow(3px 3px 0 rgba(0,0,0,.5))';
@@ -6,7 +6,6 @@ const iconHover = iconDefault + ' ' + 'drop-shadow(0 0 2px rgba(255,255,255,.9))
 const iconActive = 'drop-shadow(1px 1px 0 rgba(0,0,0,.5)) drop-shadow(0 0 1px rgba(255,255,255,.9))';
 const useStyles = makeStyles(theme => ({
   root: {
-    position: 'relative',
     backgroundColor: 'transparent',
     cursor: `url(${process.env.PUBLIC_URL + '/assets/cursors/wonky-hand-point.cur'}),pointer`,
     filter: iconDefault,
@@ -20,6 +19,11 @@ const useStyles = makeStyles(theme => ({
     '&:focus': {
       outline: 'none'
     }
+  },
+  inner: {
+    position: 'relative',
+    width: '100%',
+    height: '100%'
   },
   background: {
     position: 'absolute',
@@ -45,15 +49,13 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     '& img': {
-      maxWidth: '100%',
-      maxHeight: '100%'
+      padding: '0 5% 0 0'
     },
     '& span': {
       fontFamily: '"RobotoSlab", serif',
-      // fontWeight: 500,
+      fontWeight: 500,
       textTransform: 'uppercase',
       wordSpacing: '100vw',
-      fontSize: '0.875rem',
       lineHeight: 1.25
     }
   }
@@ -70,12 +72,41 @@ interface HeaderButtonProps {
 const ThemeButton: React.FC<HeaderButtonProps> = ({iconSource, backgroundSource, style, title, isText = false}) => {
   const classes = useStyles();
 
+  const rootRef = useRef<HTMLButtonElement>(null);
+  const [fontSize, setFontSize] = useState(0);
+  useEffect(() => {
+    if (!rootRef.current) {
+      return
+    }
+    const lines = title.split(' ').length || 1;
+    const rootHeight = rootRef.current.getBoundingClientRect().height;
+    setFontSize(rootHeight / lines / 4);
+  }, [title]);
+
+  const iconStyle: React.CSSProperties = useMemo(() => {
+    if (isText) {
+      return {
+        width: '15%',
+        height: '100%',
+        objectFit: 'contain'
+      }
+    } else {
+      return {
+        width: '70%',
+        height: '70%',
+        objectFit: 'contain'
+      }
+    }
+  }, [isText]);
+
   return (
-    <button className={classes.root} style={{...style}} aria-label={title}>
-      {backgroundSource && <div className={classes.background}><img src={backgroundSource} alt={title}/></div>}
-      <div className={classes.content}>
-        {iconSource && <img src={iconSource} alt={title}/>}
-        {isText && <span>{title}</span>}
+    <button className={classes.root} style={{...style}} aria-label={title} ref={rootRef}>
+      <div className={classes.inner}>
+        {backgroundSource && <div className={classes.background}><img src={backgroundSource} alt={title}/></div>}
+        <div className={classes.content}>
+          {iconSource && <img src={iconSource} alt={title} style={iconStyle}/>}
+          {isText && <span style={{fontSize}}>{title}</span>}
+        </div>
       </div>
     </button>
   )

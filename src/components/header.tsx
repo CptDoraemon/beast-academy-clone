@@ -78,9 +78,9 @@ const Header: React.FC = () => {
         <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
         <div className={classes.centerButtonsGroup}>
           <div className={classes.centerButtonsGroupBackground}> </div>
-          <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/icons/octagon.svg`} style={centerButtonStyle} title={'learn more'} isText={true}/>
+          <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/octagon.svg`} style={centerButtonStyle} title={'learn more'} isText={true}/>
           <span className={classes.centerTitle}>DEMO</span>
-          <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/icons/octagon.svg`} style={centerButtonStyle} title={'enroll now'} isText={true}/>
+          <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/octagon.svg`} style={centerButtonStyle} title={'enroll now'} isText={true}/>
         </div>
         <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
         <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>

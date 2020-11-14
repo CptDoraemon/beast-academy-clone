@@ -1,9 +1,11 @@
 import React, {useEffect, useMemo, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
+import ThemeButton from "./theme-button";
 
 const zIndices = {
   sky: 1,
-  underSky: 2
+  underSky: 2,
+  button: 99
 };
 
 const useStyles = makeStyles(theme => ({
@@ -322,6 +324,8 @@ const HomePaintings: React.FC<HomePaintingsProps> = () => {
       <img src={`${process.env.PUBLIC_URL}/assets/paintings/theater-text-13.svg`} className={classes.theatre} alt={'theatre'}/>
       <img src={`${process.env.PUBLIC_URL}/assets/paintings/homescreen-library.svg`} className={classes.library} alt={'library'}/>
       <img src={`${process.env.PUBLIC_URL}/assets/paintings/homescreen-main-building.svg`} className={classes.school} alt={'school'}/>
+
+      {/* clock */}
       <div className={classes.clock}>
         <img src={`${process.env.PUBLIC_URL}/assets/paintings/homescreen-clock-face.svg`} className={classes.clockFace} alt={'clockFace'}/>
         <div className={classes.clockMinuteWrapper} style={styles.minuteHandStyle}>
@@ -334,6 +338,44 @@ const HomePaintings: React.FC<HomePaintingsProps> = () => {
           <div className={classes.clockSecondImage}> </div>
         </div>
       </div>
+
+      {/* buttons */}
+      <ThemeButton
+        title={'library'} backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/quad.svg`} isText={true}
+        iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book-white.svg`}
+        style={{
+          position: "absolute",
+          zIndex: zIndices.button,
+          left: '6.5%',
+          bottom: '19.2%',
+          height: '8.5%',
+          width: '16%'
+        }}
+      />
+      <ThemeButton
+        title={'class'} backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/quad2.svg`} isText={true}
+        iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell-white.svg`}
+        style={{
+          position: "absolute",
+          zIndex: zIndices.button,
+          left: '39.1%',
+          bottom: '11.8%',
+          height: '9.5%',
+          width: '20%'
+        }}
+      />
+      <ThemeButton
+        title={'theater'} backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/quad3.svg`} isText={true}
+        iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector-white.svg`}
+        style={{
+          position: "absolute",
+          zIndex: zIndices.button,
+          left: '76.2%',
+          bottom: '16.5%',
+          height: '9.5%',
+          width: '15.5%',
+        }}
+      />
     </div>
   )
 };
