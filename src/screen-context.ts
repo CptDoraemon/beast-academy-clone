@@ -4,7 +4,9 @@ interface ScreenDimension {
   width: number,
   height: number,
   mainContainerWidth: number,
-  mainContainerHeight: number
+  mainContainerHeight: number,
+  mainContainerX: number,
+  mainContainerY: number
 }
 
 const ScreenContext = React.createContext<null | ScreenDimension>(null);
@@ -35,7 +37,9 @@ const useGetScreenDimension = () => {
       width: screenWidth,
       height: screenHeight,
       mainContainerWidth,
-      mainContainerHeight
+      mainContainerHeight,
+      mainContainerX: (screenWidth - mainContainerWidth) / 2,
+      mainContainerY: (screenHeight - mainContainerHeight) / 2,
     })
   }, []);
 
