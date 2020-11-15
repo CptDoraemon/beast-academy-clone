@@ -1,8 +1,7 @@
-import React, {useContext, useEffect, useRef} from "react";
+import React, {useEffect, useRef} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ThemeButton from "./theme-button";
-import MuiTooltip from "@material-ui/core/Tooltip";
-import Tooltip from "./tooptip";
+import Tooltip from "./tooltip/tooltip";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -123,14 +122,18 @@ const Header: React.FC = () => {
     <div className={classes.root}>
       <img src={process.env.PUBLIC_URL + '/assets/ba-top-bar.svg'} className={classes.background}/>
       <div className={classes.buttonsWrapper}>
-        <Tooltip text={'home'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-baHome.svg`} style={{width: '9%', height: '100%'}} title={'home'}/>
+        <Tooltip text={'Home'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-baHome.svg`} style={{width: '9%', height: '100%'}} title={'Home'}/>
         </Tooltip>
-        <Tooltip text={'class'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell.svg`} style={{width: '8%', height: '100%'}} title={'class'}/>
+        <Tooltip text={'Class'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell.svg`} style={{width: '8%', height: '100%'}} title={'Class'}/>
         </Tooltip>
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book.svg`} style={{width: '8%', height: '100%'}} title={'library'}/>
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={{width: '8%', height: '100%'}} title={'theatre'}/>
+        <Tooltip text={'Library'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book.svg`} style={{width: '8%', height: '100%'}} title={'Library'}/>
+        </Tooltip>
+        <Tooltip text={'Theater'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={{width: '8%', height: '100%'}} title={'Theater'}/>
+        </Tooltip>
 
         {/* center groups */}
         <div className={classes.centerButtonsGroup} ref={centerGroupRef}>
@@ -141,13 +144,22 @@ const Header: React.FC = () => {
         </div>
 
 
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
-        <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={{width: '8%', height: '100%'}} title={'home'}/>
+        <Tooltip text={'Help'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} style={{width: '8%', height: '100%'}} title={'Help'}/>
+        </Tooltip>
+        <Tooltip text={'Settings'}>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={{width: '8%', height: '100%'}} title={'Settings'}/>
+        </Tooltip>
+
+
         <div style={{width: '17%', height: '100%', transform: 'translateX(10%)'}} className={classes.right}>
-          <ThemeButton
-            iconSource={`${process.env.PUBLIC_URL}/assets/icons/default-avatar.svg`}
-            backgroundSource={`${process.env.PUBLIC_URL}/assets/icons/button-surround.svg`}
-            style={{width: '25%', height: '100%'}} title={'profile'}/>
+          <Tooltip text={'Profile'}>
+            <ThemeButton
+              iconSource={`${process.env.PUBLIC_URL}/assets/icons/default-avatar.svg`}
+              backgroundSource={`${process.env.PUBLIC_URL}/assets/icons/button-surround.svg`}
+              style={{width: '25%', height: '100%'}} title={'Profile'}
+            />
+          </Tooltip>
             <div className={classes.guest}>
               Guest
               <img src={`${process.env.PUBLIC_URL}/assets/icons/button-right-yellow.svg`} alt='profile more'/>

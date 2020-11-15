@@ -1,29 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import ReactDOM from 'react-dom';
-
-const useStyles = makeStyles(theme => ({
-  root: {
-    position: 'fixed',
-    zIndex: theme.zIndex.tooltip,
-  }
-}));
-
-interface TooltipMessageProps {
-  message: string,
-  x: number,
-  y: number
-}
-
-const TooltipMessage: React.FC<TooltipMessageProps> = ({message, x, y}) => {
-  const classes = useStyles();
-
-  return (
-    <div className={classes.root} style={{left: x + 10, top: y - 10}}>
-      {message}
-    </div>
-  )
-};
+import TooltipMessage from "./tooltip-message";
 
 interface TooltipProps {
   children: any,
