@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import ThemeButton from "./theme-button";
+import ThemeButton from "./buttons/theme-button";
 import Tooltip from "./tooltip/tooltip";
 
 const zIndices = {

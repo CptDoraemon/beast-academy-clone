@@ -1,7 +1,43 @@
-import React, {useEffect, useRef} from "react";
+import React, {useCallback, useEffect, useRef, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import ThemeButton from "./theme-button";
+import ThemeButton from "./buttons/theme-button";
 import Tooltip from "./tooltip/tooltip";
+
+const usePullOut = () => {
+  const [isPullOutActive, setIsPullOutActive] = useState(false);
+  const timerRef = useRef<null | number>(null);
+
+  const clearTimer = useCallback(() => {
+    if (timerRef.current !== null) {
+      window.clearTimeout(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+
+  const makePullOutActive = useCallback(() => {
+    clearTimer();
+    setIsPullOutActive(true)
+  }, [clearTimer]);
+
+  const makePullOutInactive = useCallback(() => {
+    clearTimer();
+    timerRef.current = window.setTimeout(() => {
+      setIsPullOutActive(false);
+    }, 50)
+  }, [clearTimer]);
+
+  useEffect(() => {
+    return () => {
+      clearTimer()
+    }
+  }, [clearTimer]);
+
+  return {
+    isPullOutActive,
+    makePullOutActive,
+    makePullOutInactive
+  }
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,7 +102,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
+    position: 'absolute',
+    right: '-2%'
   },
   guest: {
     marginLeft: '10%',
@@ -81,6 +119,11 @@ const useStyles = makeStyles(theme => ({
       margin: '0 0 0 5px',
       width: '15%'
     }
+  },
+  pullOut: {
+    position: 'absolute',
+    transition: theme.transitions.create('transform'),
+    zIndex: -1
   }
 }));
 
@@ -89,6 +132,11 @@ const Header: React.FC = () => {
   const centerGroupRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const centerButtonStyle = {width: '20%', margin: '0 5%', zIndex: 2, height: '100%'};
+  const {
+    isPullOutActive,
+    makePullOutActive,
+    makePullOutInactive
+  } = usePullOut();
 
   useEffect(() => {
     if (!canvasRef.current || !centerGroupRef.current) {
@@ -152,7 +200,7 @@ const Header: React.FC = () => {
         </Tooltip>
 
 
-        <div style={{width: '17%', height: '100%', transform: 'translateX(10%)'}} className={classes.right}>
+        <div style={{width: '17%', height: '100%'}} className={classes.right}>
           <Tooltip text={'Profile'}>
             <ThemeButton
               iconSource={`${process.env.PUBLIC_URL}/assets/icons/default-avatar.svg`}
@@ -160,10 +208,14 @@ const Header: React.FC = () => {
               style={{width: '25%', height: '100%'}} title={'Profile'}
             />
           </Tooltip>
-            <div className={classes.guest}>
-              Guest
-              <img src={`${process.env.PUBLIC_URL}/assets/icons/button-right-yellow.svg`} alt='profile more'/>
-            </div>
+          <div className={classes.guest} onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}>
+            Guest
+            <img src={`${process.env.PUBLIC_URL}/assets/icons/button-right-yellow.svg`} alt='profile more'/>
+          </div>
+        </div>
+
+        <div style={{width: '8%', height: '100%', top: '15%', right: 0, transform: `translateX(${isPullOutActive ? '50%' : '-100%'})`}} className={classes.pullOut} onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}>
+          <ThemeButton title={'EXIT'} backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/quad4.svg`} style={{width: '200%', height: '100%'}} isText textStyle={{color: '#ffce41'}}/>
         </div>
       </div>
     </div>

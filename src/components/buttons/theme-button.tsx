@@ -66,11 +66,12 @@ interface HeaderButtonProps {
   backgroundSource?: string,
   style?: React.CSSProperties,
   iconStyle?: React.CSSProperties,
+  textStyle?: React.CSSProperties,
   title: string,
   isText?: boolean
 }
 
-const ThemeButton = React.forwardRef<HTMLButtonElement | null, HeaderButtonProps>(({iconSource, backgroundSource, style, iconStyle, title, isText = false}, ref) => {
+const ThemeButton = React.forwardRef<HTMLButtonElement | null, HeaderButtonProps>(({iconSource, backgroundSource, style, iconStyle, title, isText = false, textStyle}, ref) => {
     const classes = useStyles();
 
     const rootRef = useRef<HTMLButtonElement | null>(null);
@@ -114,7 +115,7 @@ const ThemeButton = React.forwardRef<HTMLButtonElement | null, HeaderButtonProps
           {backgroundSource && <div className={classes.background}><img src={backgroundSource} alt={title}/></div>}
           <div className={classes.content} style={{...iconStyle}}>
             {iconSource && <img src={iconSource} alt={title} style={{...defaultIconStyle, ...iconStyle}}/>}
-            {isText && <span style={{fontSize}}>{title}</span>}
+            {isText && <span style={{fontSize, ...textStyle}}>{title}</span>}
           </div>
         </div>
       </button>

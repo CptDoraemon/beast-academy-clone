@@ -1,0 +1,9 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 86 62" preserveAspectRatio="none" style="position: absolute; left: -5.40541%; top: -8%; width: 116.216%; height: 124%;">
+	<path style="fill: #0659a6" d="M0,6.6456L68.600315904,2.0592133189189186L71.924484096,48.00619208648649L0,45.8544z"></path>
+	<path style="fill: #4191ce" d="M0,5L70.3,0L70.72979199999999,5.808L0,9.9368z"></path>
+	<path style="fill: #4191ce" d="M74,50L70.3,0L64.7824,0.3924324324324324L68.19200000000001,49.803783783783786z"></path>
+	<path style="fill: #4191ce" d="M74,50L0,47.5L0,42.563199999999995L73.570208,44.192z"></path>
+	<defs>
+		<filter id="blur"><feGaussianBlur in="SourceAlpha" stdDeviation="2"></feGaussianBlur></filter>
+	</defs>
+</svg>
