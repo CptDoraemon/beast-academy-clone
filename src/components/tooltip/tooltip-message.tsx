@@ -27,27 +27,35 @@ const useStyles = makeStyles(theme => ({
   },
   textDimension: {
     padding: '2px 5px',
-    maxWidth: 300,
     width: 'fit-content',
     textAlign: 'center'
-  }
+  },
 }));
 
 interface TooltipMessageProps {
   message: string,
   x: number,
   y: number,
+  maxWidth: number,
   handleMouseMove: (e: React.MouseEvent) => void
   handleMouseLeave: (e: React.MouseEvent) => void
 }
 
-const TooltipMessage: React.FC<TooltipMessageProps> = ({message, x, y, handleMouseMove, handleMouseLeave}) => {
+const TooltipMessage: React.FC<TooltipMessageProps> = ({message, x, y, maxWidth, handleMouseMove, handleMouseLeave}) => {
   const classes = useStyles();
   const textRef = useRef<HTMLDivElement>(null);
   const [dimension, setDimension] = useState<{width: number, height: number} | null>(null);
   const screen = useContext(ScreenContext);
   const borderX = screen?.mainContainerX || 0;
   const borderY = screen?.mainContainerY || 0;
+
+  const textDimensionStyle = useMemo(() => {
+    const _fontSize = Math.floor(maxWidth / 20);
+    return {
+      maxWidth,
+      fontSize: Math.max(Math.min(_fontSize, 16), 8)
+    }
+  }, [maxWidth]);
 
   useEffect(() => {
     if (!textRef.current) {
@@ -78,7 +86,7 @@ const TooltipMessage: React.FC<TooltipMessageProps> = ({message, x, y, handleMou
 
   if (dimension === null) {
     return (
-      <div className={clsx(classes.root, classes.textDimension)} style={{left: -9999, top: -9999}} ref={textRef}>
+      <div className={clsx(classes.root, classes.textDimension)} style={{left: -9999, top: -9999, ...textDimensionStyle}} ref={textRef}>
         {message}
       </div>
     )
@@ -136,7 +144,7 @@ const TooltipMessage: React.FC<TooltipMessageProps> = ({message, x, y, handleMou
       <div className={classes.root} style={rootStyle} onMouseMove={handleMouseMove} onMouseLeave={handleMouseLeave}>
         <div className={classes.innerWrapper}>
           <img src={`${process.env.PUBLIC_URL}/assets/shapes/tooltip-small.svg`} alt={'tooltip'} className={classes.background} style={imgStyle}/>
-          <span className={clsx(classes.text, classes.textDimension)} style={textStyle}>
+          <span className={clsx(classes.text, classes.textDimension)} style={{...textStyle, ...textDimensionStyle}}>
           {message}
         </span>
         </div>

@@ -1,7 +1,8 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useContext, useEffect, useMemo, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ThemeButton from "./buttons/theme-button";
 import Tooltip from "./tooltip/tooltip";
+import {ScreenContext} from "../screen-context";
 
 const zIndices = {
   sky: 1,
@@ -272,6 +273,7 @@ interface HomePaintingsProps {
 
 const HomePaintings: React.FC<HomePaintingsProps> = () => {
   const classes = useStyles();
+  const maxTooltipWidth = useContext(ScreenContext)?.maxTooltipWidth || 0;
 
   const styles = useMemo(() => {
     const date = new Date(Date.now());
@@ -321,7 +323,7 @@ const HomePaintings: React.FC<HomePaintingsProps> = () => {
       <img src={`${process.env.PUBLIC_URL}/assets/paintings/homescreen-five-trees-left.svg`} className={classes.tree4} alt={'tree4'}/>
       <img src={`${process.env.PUBLIC_URL}/assets/paintings/homescreen-four-trees-right.svg`} className={classes.tree5} alt={'tree5'}/>
       <img src={`${process.env.PUBLIC_URL}/assets/paintings/homescreen-six-trees-right.svg`} className={classes.tree6} alt={'tree6'}/>
-      <Tooltip text={'The full version of BA Online includes a Puzzle Lab with more than 250 puzzles that complement the standard lessons.'}>
+      <Tooltip text={'The full version of BA Online includes a Puzzle Lab with more than 250 puzzles that complement the standard lessons.'} maxWidth={maxTooltipWidth}>
         <img src={`${process.env.PUBLIC_URL}/assets/paintings/homescreen-lab.svg`} className={classes.lab} alt={'lab'}/>
       </Tooltip>
       <img src={`${process.env.PUBLIC_URL}/assets/paintings/theater-text-13.svg`} className={classes.theatre} alt={'theatre'}/>

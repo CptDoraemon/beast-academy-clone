@@ -7,10 +7,11 @@ const HOVER_IN_DELAY = 0;
 
 interface TooltipProps {
   children: any,
-  text: string
+  text: string,
+  maxWidth: number
 }
 
-const Tooltip: React.FC<TooltipProps> = ({children, text}) => {
+const Tooltip: React.FC<TooltipProps> = ({children, text, maxWidth}) => {
   const targetRef = useRef<HTMLElement>(null);
   const portalContainerRef = useRef<HTMLDivElement | null>(null);
   const hoverInTimer = useRef<null | number>(null);
@@ -84,7 +85,7 @@ const Tooltip: React.FC<TooltipProps> = ({children, text}) => {
       { React.cloneElement(children, {...children.props, ref: targetRef}) }
       {
         isHovering && portalContainerRef.current &&
-        ReactDOM.createPortal(<TooltipMessage message={text} x={clientX} y={clientY} handleMouseLeave={handleMouseLeave} handleMouseMove={handleMouseMove}/>, portalContainerRef.current)
+        ReactDOM.createPortal(<TooltipMessage message={text} x={clientX} y={clientY} handleMouseLeave={handleMouseLeave} handleMouseMove={handleMouseMove} maxWidth={maxWidth}/>, portalContainerRef.current)
       }
     </>
   )

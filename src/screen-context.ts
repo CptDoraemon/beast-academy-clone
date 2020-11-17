@@ -6,7 +6,8 @@ interface ScreenDimension {
   mainContainerWidth: number,
   mainContainerHeight: number,
   mainContainerX: number,
-  mainContainerY: number
+  mainContainerY: number,
+  maxTooltipWidth: number
 }
 
 const ScreenContext = React.createContext<null | ScreenDimension>(null);
@@ -40,6 +41,7 @@ const useGetScreenDimension = () => {
       mainContainerHeight,
       mainContainerX: (screenWidth - mainContainerWidth) / 2,
       mainContainerY: (screenHeight - mainContainerHeight) / 2,
+      maxTooltipWidth: mainContainerWidth * 0.3
     })
   }, []);
 

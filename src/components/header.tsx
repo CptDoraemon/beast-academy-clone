@@ -1,7 +1,8 @@
-import React, {useCallback, useEffect, useRef, useState} from "react";
+import React, {useCallback, useContext, useEffect, useRef, useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import ThemeButton from "./buttons/theme-button";
 import Tooltip from "./tooltip/tooltip";
+import {ScreenContext} from "../screen-context";
 
 const usePullOut = () => {
   const [isPullOutActive, setIsPullOutActive] = useState(false);
@@ -139,6 +140,7 @@ const Header: React.FC = () => {
     makePullOutActive,
     makePullOutInactive
   } = usePullOut();
+  const maxTooltipWidth = useContext(ScreenContext)?.maxTooltipWidth || 0;
 
   useEffect(() => {
     if (!canvasRef.current || !centerGroupRef.current) {
@@ -174,16 +176,16 @@ const Header: React.FC = () => {
     <div className={classes.root}>
       <img src={process.env.PUBLIC_URL + '/assets/ba-top-bar.svg'} className={classes.background}/>
       <div className={classes.buttonsWrapper}>
-        <Tooltip text={'Home'}>
+        <Tooltip text={'Home'} maxWidth={maxTooltipWidth}>
           <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-baHome.svg`} style={buttonStyle} title={'Home'}/>
         </Tooltip>
-        <Tooltip text={'Class'}>
+        <Tooltip text={'Class'} maxWidth={maxTooltipWidth}>
           <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell.svg`} style={buttonStyle} title={'Class'}/>
         </Tooltip>
-        <Tooltip text={'Library'}>
+        <Tooltip text={'Library'} maxWidth={maxTooltipWidth}>
           <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book.svg`} style={buttonStyle} title={'Library'}/>
         </Tooltip>
-        <Tooltip text={'Theater'}>
+        <Tooltip text={'Theater'} maxWidth={maxTooltipWidth}>
           <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={buttonStyle} title={'Theater'}/>
         </Tooltip>
 
@@ -196,14 +198,14 @@ const Header: React.FC = () => {
         </div>
 
 
-        <Tooltip text={'Help'}>
+        <Tooltip text={'Help'} maxWidth={maxTooltipWidth}>
           <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} style={buttonStyle} title={'Help'}/>
         </Tooltip>
-        <Tooltip text={'Settings'}>
+        <Tooltip text={'Settings'} maxWidth={maxTooltipWidth}>
           <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={buttonStyle} title={'Settings'}/>
         </Tooltip>
 
-        <Tooltip text={'Profile'}>
+        <Tooltip text={'Profile'} maxWidth={maxTooltipWidth}>
           <ThemeButton
             style={{width: '7%', height: '60%'}}
             iconSource={`${process.env.PUBLIC_URL}/assets/icons/default-avatar.svg`}
