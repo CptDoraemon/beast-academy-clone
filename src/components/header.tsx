@@ -42,23 +42,23 @@ const usePullOut = () => {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '90%',
-    height: '10%',
+    height: '8.5%',
     position: 'absolute',
     zIndex: theme.zIndex.appBar,
     top: 0,
     left: '50%',
     transform: 'translateX(-50%)',
     filter: 'drop-shadow(0 0 .4rem rgba(0,0,0,.9))',
-    cursor: ''
   },
   background: {
-    width: '100%',
+    maxWidth: '100%',
+    maxHeight: '100%',
   },
   buttonsWrapper: {
-    width: '96%',
-    height: '70%',
+    width: '100%',
+    height: '100%',
     position: 'absolute',
-    left: '2%',
+    left: 0,
     top: 0,
     display: 'flex',
     flexDirection: 'row',
@@ -168,21 +168,23 @@ const Header: React.FC = () => {
 
   }, []);
 
+  const buttonStyle = {width: '9%', height: '80%'};
+
   return (
     <div className={classes.root}>
       <img src={process.env.PUBLIC_URL + '/assets/ba-top-bar.svg'} className={classes.background}/>
       <div className={classes.buttonsWrapper}>
         <Tooltip text={'Home'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-baHome.svg`} style={{width: '9%', height: '100%'}} title={'Home'}/>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-baHome.svg`} style={buttonStyle} title={'Home'}/>
         </Tooltip>
         <Tooltip text={'Class'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell.svg`} style={{width: '8%', height: '100%'}} title={'Class'}/>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-bell.svg`} style={buttonStyle} title={'Class'}/>
         </Tooltip>
         <Tooltip text={'Library'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book.svg`} style={{width: '8%', height: '100%'}} title={'Library'}/>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-book.svg`} style={buttonStyle} title={'Library'}/>
         </Tooltip>
         <Tooltip text={'Theater'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={{width: '8%', height: '100%'}} title={'Theater'}/>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-projector.svg`} style={buttonStyle} title={'Theater'}/>
         </Tooltip>
 
         {/* center groups */}
@@ -195,37 +197,37 @@ const Header: React.FC = () => {
 
 
         <Tooltip text={'Help'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} style={{width: '8%', height: '100%'}} title={'Help'}/>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-help.svg`} style={buttonStyle} title={'Help'}/>
         </Tooltip>
         <Tooltip text={'Settings'}>
-          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={{width: '8%', height: '100%'}} title={'Settings'}/>
+          <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={buttonStyle} title={'Settings'}/>
         </Tooltip>
 
         <Tooltip text={'Profile'}>
           <ThemeButton
-            style={{width: '8%', height: '80%'}}
+            style={{width: '7%', height: '60%'}}
             iconSource={`${process.env.PUBLIC_URL}/assets/icons/default-avatar.svg`}
             backgroundSource={`${process.env.PUBLIC_URL}/assets/icons/button-surround.svg`}
             title={'Profile'}
           />
         </Tooltip>
 
-        <div style={{width: '8%', height: '100%'}} className={classes.right}>
-          <div className={classes.guest}>
-            Guest
-            <img src={`${process.env.PUBLIC_URL}/assets/icons/button-right-yellow.svg`} alt='profile more'/>
-          </div>
+        <div className={classes.guest}
+             style={{width: '11%', height: '80%'}}
+        >
+          Guest
+          <img src={`${process.env.PUBLIC_URL}/assets/icons/button-right-yellow.svg`} alt='profile more'/>
         </div>
 
         {/* hover detection for pullout */}
         <div
-          style={{width: '10%', height: '100%', position: 'absolute', right: '-2%'}}
+          style={{width: '11%', height: '100%', position: 'absolute', right: 0}}
           onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}
         >
         </div>
 
-        <div style={{width: '8%', height: '100%', top: '15%', right: 0, transform: `translateX(${isPullOutActive ? '50%' : '-100%'})`}} className={classes.pullOut} onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}>
-          <ThemeButton title={'EXIT'} backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/quad4.svg`} style={{width: '200%', height: '100%'}} isText textStyle={{color: '#ffce41'}}/>
+        <div style={{width: '8%', height: '100%', top: '12%', right: 0, transform: `translateX(${isPullOutActive ? '50%' : '-100%'})`}} className={classes.pullOut} onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}>
+          <ThemeButton title={'EXIT'} backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/quad4.svg`} style={{width: '200%', height: '80%'}} isText textStyle={{color: '#ffce41'}}/>
         </div>
       </div>
     </div>
