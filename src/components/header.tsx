@@ -104,21 +104,23 @@ const useStyles = makeStyles(theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     position: 'absolute',
-    right: '-2%'
+    right: 0
   },
   guest: {
-    marginLeft: '10%',
     fontSize: '1.75rem',
     color: '#ffce41',
     filter: 'drop-shadow(3px 3px 0 rgba(0,0,0,.5))',
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'row',
+    justifyContent: 'center',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '1rem',
+    },
     '& img': {
       margin: '0 0 0 5px',
       width: '15%'
-    }
+    },
   },
   pullOut: {
     position: 'absolute',
@@ -199,19 +201,27 @@ const Header: React.FC = () => {
           <ThemeButton iconSource={`${process.env.PUBLIC_URL}/assets/icons/button-settings.svg`} style={{width: '8%', height: '100%'}} title={'Settings'}/>
         </Tooltip>
 
+        <Tooltip text={'Profile'}>
+          <ThemeButton
+            style={{width: '8%', height: '80%'}}
+            iconSource={`${process.env.PUBLIC_URL}/assets/icons/default-avatar.svg`}
+            backgroundSource={`${process.env.PUBLIC_URL}/assets/icons/button-surround.svg`}
+            title={'Profile'}
+          />
+        </Tooltip>
 
-        <div style={{width: '17%', height: '100%'}} className={classes.right}>
-          <Tooltip text={'Profile'}>
-            <ThemeButton
-              iconSource={`${process.env.PUBLIC_URL}/assets/icons/default-avatar.svg`}
-              backgroundSource={`${process.env.PUBLIC_URL}/assets/icons/button-surround.svg`}
-              style={{width: '25%', height: '100%'}} title={'Profile'}
-            />
-          </Tooltip>
-          <div className={classes.guest} onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}>
+        <div style={{width: '8%', height: '100%'}} className={classes.right}>
+          <div className={classes.guest}>
             Guest
             <img src={`${process.env.PUBLIC_URL}/assets/icons/button-right-yellow.svg`} alt='profile more'/>
           </div>
+        </div>
+
+        {/* hover detection for pullout */}
+        <div
+          style={{width: '10%', height: '100%', position: 'absolute', right: '-2%'}}
+          onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}
+        >
         </div>
 
         <div style={{width: '8%', height: '100%', top: '15%', right: 0, transform: `translateX(${isPullOutActive ? '50%' : '-100%'})`}} className={classes.pullOut} onMouseEnter={makePullOutActive} onMouseLeave={makePullOutInactive}>
