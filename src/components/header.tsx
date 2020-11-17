@@ -3,6 +3,7 @@ import makeStyles from "@material-ui/core/styles/makeStyles";
 import ThemeButton from "./buttons/theme-button";
 import Tooltip from "./tooltip/tooltip";
 import {ScreenContext} from "../screen-context";
+import useDynamicFontSize from "../helpers/useDynamicFontSize";
 
 const usePullOut = () => {
   const [isPullOutActive, setIsPullOutActive] = useState(false);
@@ -134,7 +135,10 @@ const Header: React.FC = () => {
   const classes = useStyles();
   const centerGroupRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const guestRef = useRef<HTMLDivElement>(null);
   const centerButtonStyle = {width: '20%', margin: '0 5%', zIndex: 2, height: '100%'};
+  const centerTextStyle = useDynamicFontSize({ref: centerGroupRef, scale: 8, max: 42});
+  const guestTextStyle = useDynamicFontSize({ref: guestRef, scale: 4, max: 22});
   const {
     isPullOutActive,
     makePullOutActive,
@@ -193,7 +197,7 @@ const Header: React.FC = () => {
         <div className={classes.centerButtonsGroup} ref={centerGroupRef}>
           <canvas ref={canvasRef} width={1} height={1} className={classes.centerButtonsGroupBackground}/>
           <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/octagon.svg`} style={centerButtonStyle} title={'learn more'} isText={true}/>
-          <span className={classes.centerTitle}>DEMO</span>
+          <span className={classes.centerTitle} style={centerTextStyle}>DEMO</span>
           <ThemeButton backgroundSource={`${process.env.PUBLIC_URL}/assets/shapes/octagon.svg`} style={centerButtonStyle} title={'enroll now'} isText={true}/>
         </div>
 
@@ -215,7 +219,8 @@ const Header: React.FC = () => {
         </Tooltip>
 
         <div className={classes.guest}
-             style={{width: '11%', height: '80%'}}
+             style={{width: '11%', height: '80%', ...guestTextStyle}}
+             ref={guestRef}
         >
           Guest
           <img src={`${process.env.PUBLIC_URL}/assets/icons/button-right-yellow.svg`} alt='profile more'/>
